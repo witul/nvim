@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'sickill/vim-monokai'
 Plug 'jamessan/vim-gnupg'
 Plug 'shougo/unite.vim'
+Plug 'nathanaelkane/vim-indent-guides'
 
 "git
 Plug 'airblade/vim-gitgutter'
@@ -11,17 +12,19 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 Plug 'mattn/emmet-vim'
 Plug 'lepture/vim-css'
-Plug 'othree/html5.vim'
-Plug 'cakebaker/scss-syntax.vim'
+"Plug 'othree/html5.vim'
 "Plug 'garbas/vim-snipmate' | Plug 'honza/vim-snippets'
 " Plug 'aklt/plantuml-syntax', {'for': 'uml'}
 Plug 'avakhov/vim-yaml', { 'for': 'yaml'}
-Plug 'dhruvasagar/vim-table-mode', { 'on':  'TableModeEnable' }
+"Plug 'dhruvasagar/vim-table-mode', { 'on':  'TableModeEnable' }
 
+Plug 'tpope/vim-surround'
 " nowe
 Plug 'pangloss/vim-javascript', { 'for' : 'javascript'}
+Plug 'cakebaker/scss-syntax.vim', {'for' : 'scss'}
 Plug 'isRuslan/vim-es6', { 'for' : 'javascript'}
 Plug 'othree/html5.vim', { 'for' : 'html'}
+Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
 Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
 if has("win16") || has("win32")
     Plug 'pprovost/vim-ps1'
@@ -242,7 +245,7 @@ map <C-9> 9gt
 map <C-0> :tablast<CR>
 
 "easy edit vimrc
-nmap <leader>ev :tabedit ~/.vimrc<cr>
+nmap <leader>ev :tabedit ~/.vim/vimrc<cr>
 
 "reload vimrc after save
 "au BufWritePost .vimrc source %
