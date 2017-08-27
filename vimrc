@@ -2,7 +2,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'sickill/vim-monokai'
 Plug 'jamessan/vim-gnupg'
-Plug 'shougo/unite.vim'
+"Plug 'shougo/unite.vim'
+Plug 'shougo/denite.nvim'
 Plug 'nathanaelkane/vim-indent-guides'
 
 "git
@@ -20,6 +21,7 @@ Plug 'avakhov/vim-yaml', { 'for': 'yaml'}
 
 Plug 'tpope/vim-surround'
 " nowe
+Plug 'posva/vim-vue', { 'for' : 'vue'}
 Plug 'pangloss/vim-javascript', { 'for' : 'javascript'}
 Plug 'cakebaker/scss-syntax.vim', {'for' : 'scss'}
 Plug 'isRuslan/vim-es6', { 'for' : 'javascript'}
@@ -324,8 +326,42 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
+" Unite
+let g:denite_source_history_yank_enable = 1
+nnoremap <leader>t :<C-u>Denite -no-split -buffer-name=files -vertical-preview  file_rec<cr>
+nnoremap <leader>f :<C-u>Denite -no-split -buffer-name=files -vertical-preview  file<cr>
+" nnoremap <leader>r :<C-u>Denite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+" nnoremap <leader>o :<C-u>Denite -no-split -buffer-name=outline -start-insert outline<cr>
+" nnoremap <leader>y :<C-u>Denite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>e :<C-u>Denite -no-split -buffer-name=buffer -vertical-preview buffer<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" call denite#filters#matcher_default#use(['matcher_fuzzy'])
+
+        " Change mappings.
+        call denite#custom#map(
+              \ 'insert',
+              \ '<C-j>',
+              \ '<denite:move_to_next_line>',
+              \ 'noremap'
+              \)
+        call denite#custom#map(
+              \ 'insert',
+              \ '<C-k>',
+              \ '<denite:move_to_previous_line>',
+              \ 'noremap'
+              \)
+        call denite#custom#map(
+              \ 'insert',
+              \ '<C-f>',
+              \ '<denite:scroll_window_downwards>',
+              \ 'noremap'
+              \)
+        call denite#custom#map(
+              \ 'insert',
+              \ '<C-b>',
+              \ '<denite:scroll_window_upwards>',
+              \ 'noremap'
+              \)
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
