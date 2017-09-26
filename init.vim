@@ -1,33 +1,67 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'sickill/vim-monokai'
+"Plug 'sickill/vim-monokai'
+"Plug 'tamelion/neovim-molokai'
+
+Plug 'chriskempson/base16-vim'
+
 Plug 'jamessan/vim-gnupg'
-"Plug 'shougo/unite.vim'
 Plug 'shougo/denite.nvim'
-Plug 'nathanaelkane/vim-indent-guides'
 
-"git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-Plug 'tpope/vim-markdown'
-Plug 'mattn/emmet-vim'
-Plug 'lepture/vim-css'
-"Plug 'othree/html5.vim'
-"Plug 'garbas/vim-snipmate' | Plug 'honza/vim-snippets'
-" Plug 'aklt/plantuml-syntax', {'for': 'uml'}
-Plug 'avakhov/vim-yaml', { 'for': 'yaml'}
-"Plug 'dhruvasagar/vim-table-mode', { 'on':  'TableModeEnable' }
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/vim-easy-align'
 
-Plug 'tpope/vim-surround'
-" nowe
+"https://github.com/cyansprite/Extract
+Plug 'cyansprite/Extract'
+
+"Plug 'vim-utils/vim-man'
+
+Plug 'tpope/vim-markdown', {'for': 'markdown'}
+Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'lepture/vim-css', {'for': 'css'}
+Plug 'avakhov/vim-yaml', { 'for': 'yaml'}
+Plug 'tpope/vim-surround', {'for': 'html'}
+Plug 'noahfrederick/vim-composer', {'on':'Composer'}
 Plug 'posva/vim-vue', { 'for' : 'vue'}
 Plug 'pangloss/vim-javascript', { 'for' : 'javascript'}
+
+Plug 'majutsushi/tagbar', { 'for': ['php','javascript']}
+
 Plug 'cakebaker/scss-syntax.vim', {'for' : 'scss'}
 Plug 'isRuslan/vim-es6', { 'for' : 'javascript'}
 Plug 'othree/html5.vim', { 'for' : 'html'}
 Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
 Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+"Plug 'Shougo/echodoc.vim'
+Plug 'vifm/neovim-vifm'
+
+Plug 'ktonga/vim-follow-my-lead'
+" Pluginy do przetestowania
+
+"Plug 'dylanaraps/taskrunner.nvim'
+"
+" vmux zainstalowany osobno
+"Plug 'jceb/vmux'
+
+
+"Plug 'mhinz/vim-lookup'
+"Plug 'andy-lang/tmux-omnivim'
+"Plug 'chrisbra/NrrwRgn'
+
+"Te sa jakies wieksze
+"Plug 'mhinz/neovim-remote'
+ 
+"Plug 'extr0py/oni'
+"Plug 'taohex/navim'
+
+
+
 if has("win16") || has("win32")
     Plug 'pprovost/vim-ps1'
 endif
@@ -35,8 +69,16 @@ endif
 if has("unix")
     Plug 'sjl/gundo.vim'
 endif    
-
 call plug#end()
+
+
+
+if filereadable(expand("~/.vimrc_background"))
+"    "#let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -58,7 +100,6 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -131,30 +172,21 @@ set tm=500
 "set foldcolumn=1
 set foldmethod=indent
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable 
+"let base16colorspace=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1 
+"colorscheme base16-tomorrow-night
+"colorscheme base16-monokai
 
 
-"set background=dark
-"set t_CO=256
-" Set extra options when running in GUI mode
-if has('gui_running')
-    set guioptions-=M  "remove menu bar
-    set guioptions-=T  "remove toolbar
-    set guioptions-=r  "remove right-hand scroll bar
-    set guioptions-=L  "remove left-hand scroll bar
-    set guitablabel=%M\ %t
-    set t_Co=256
+if (has("termguicolors"))
+  set termguicolors
 endif
-    colorscheme monokai
-
-
-
+let base16colorspace=256
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -169,7 +201,6 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 set noswapfile
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -191,8 +222,6 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -247,7 +276,7 @@ map <C-9> 9gt
 map <C-0> :tablast<CR>
 
 "easy edit vimrc
-nmap <leader>ev :tabedit ~/.vim/vimrc<cr>
+nmap <leader>ev :tabedit ~/.config/nvim/init.vim<cr>
 
 "reload vimrc after save
 "au BufWritePost .vimrc source %
@@ -256,7 +285,7 @@ let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-
+nmap <F8> :TagbarToggle<CR>
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
@@ -311,8 +340,12 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.js :call DeleteTrailingWS()
+autocmd BufWrite *.php :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
+" ESC for detach terminal
+tnoremap <Esc> <C-\><C-n>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -376,18 +409,6 @@ map <leader>x :e ~/buffer.md<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction 
-
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -423,9 +444,7 @@ function! <SID>BufcloseCloseIt()
    if buflisted(l:alternateBufNum)
      buffer #
    else
-     bnext
-   endif
-
+     bnext endif 
    if bufnr("%") == l:currentBufNum
      new
    endif
@@ -435,18 +454,26 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-" Make VIM remember position in file after reopen
-" if has("autocmd")
-"   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
-"
-"
-
 "remapping emmet
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 au BufRead,BufNewFile *.scss set filetype=scss.css
 
+let g:deoplete#enable_at_startup = 1
 
-colorscheme monokai
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['omni']
+
+"vifm
+let g:vifmUseCurrent=1
+
+
+"Follow my lead
+let g:fml_all_sources=1
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
