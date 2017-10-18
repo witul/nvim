@@ -40,15 +40,17 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 "Plug 'Shougo/echodoc.vim'
 Plug 'vifm/neovim-vifm'
-
+Plug 'itchyny/lightline.vim'
 Plug 'ktonga/vim-follow-my-lead'
+
+"Plug 'roxma/vim-tmux-clipboard'
 " Pluginy do przetestowania
 
-"Plug 'dylanaraps/taskrunner.nvim'
+" gulp
+Plug 'dylanaraps/taskrunner.nvim'
 "
 " vmux zainstalowany osobno
 "Plug 'jceb/vmux'
-
 
 "Plug 'mhinz/vim-lookup'
 "Plug 'andy-lang/tmux-omnivim'
@@ -179,8 +181,7 @@ set foldmethod=indent
 syntax enable 
 "let base16colorspace=256
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1 
-"colorscheme base16-tomorrow-night
-"colorscheme base16-monokai
+
 
 
 if (has("termguicolors"))
@@ -275,6 +276,8 @@ map <C-8> 8gt
 map <C-9> 9gt
 map <C-0> :tablast<CR>
 
+" useful for matching brackets
+noremap % v%
 "easy edit vimrc
 nmap <leader>ev :tabedit ~/.config/nvim/init.vim<cr>
 
@@ -309,6 +312,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
+set noshowmode
 
 " Format the status line
 set statusline=\ %{HasPaste()}%f%m%r%y\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
@@ -468,12 +472,21 @@ let g:deoplete#ignore_sources.php = ['omni']
 "vifm
 let g:vifmUseCurrent=1
 
+colorscheme base16-monokai
 
 "Follow my lead
 let g:fml_all_sources=1
+let g:lightline = {
+		\ 'colorscheme': 'powerline',
+		\ }
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+
+let g:taskrunner#split = "30vnew"
+let g:taskrunner#cmd = "gulp build:sass"
+
