@@ -31,6 +31,7 @@ Plug 'pangloss/vim-javascript', { 'for' : 'javascript'}
 Plug 'majutsushi/tagbar', { 'for': ['php','javascript']}
 
 Plug 'cakebaker/scss-syntax.vim', {'for' : 'scss'}
+Plug 'w0rp/ale'
 Plug 'isRuslan/vim-es6', { 'for' : 'javascript'}
 Plug 'othree/html5.vim', { 'for' : 'html'}
 Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
@@ -42,7 +43,7 @@ Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 Plug 'vifm/neovim-vifm'
 Plug 'itchyny/lightline.vim'
 Plug 'ktonga/vim-follow-my-lead'
-
+Plug 'editorconfig/editorconfig-vim'
 "Plug 'roxma/vim-tmux-clipboard'
 " Pluginy do przetestowania
 
@@ -486,7 +487,13 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'scss': ['stylelint']
+\}
+
 
 let g:taskrunner#split = "30vnew"
 let g:taskrunner#cmd = "gulp build:sass"
-
+let g:airline#extensions#ale#enabled = 1
+"let g:ale_fix_on_save = 1
