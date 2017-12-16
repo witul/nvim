@@ -1,6 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-"Plug 'sickill/vim-monokai'
+Plug 'sickill/vim-monokai'
 "Plug 'tamelion/neovim-molokai'
 
 Plug 'chriskempson/base16-vim'
@@ -181,14 +181,14 @@ set foldmethod=indent
 " Enable syntax highlighting
 syntax enable 
 "let base16colorspace=256
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1 
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1 
 
 
 
 if (has("termguicolors"))
   set termguicolors
 endif
-let base16colorspace=256
+"let base16colorspace=256
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -473,7 +473,7 @@ let g:deoplete#ignore_sources.php = ['omni']
 "vifm
 let g:vifmUseCurrent=1
 
-colorscheme base16-monokai
+colorscheme base16-atelier-forest
 
 "Follow my lead
 let g:fml_all_sources=1
