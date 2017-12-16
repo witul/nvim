@@ -20,7 +20,7 @@ Plug 'cyansprite/Extract'
 "Plug 'vim-utils/vim-man'
 
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
-Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'mattn/emmet-vim', {'for': ['html','css']}
 Plug 'lepture/vim-css', {'for': 'css'}
 Plug 'avakhov/vim-yaml', { 'for': 'yaml'}
 Plug 'tpope/vim-surround', {'for': 'html'}
@@ -36,6 +36,7 @@ Plug 'isRuslan/vim-es6', { 'for' : 'javascript'}
 Plug 'othree/html5.vim', { 'for' : 'html'}
 Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
 Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
+Plug 'stephenway/postcss.vim', {'for': 'css'}
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
@@ -48,7 +49,7 @@ Plug 'editorconfig/editorconfig-vim'
 " Pluginy do przetestowania
 
 " gulp
-Plug 'dylanaraps/taskrunner.nvim'
+"Plug 'dylanaraps/taskrunner.nvim'
 "
 " vmux zainstalowany osobno
 "Plug 'jceb/vmux'
@@ -104,6 +105,8 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+"saving as sudo
+cmap w!! w !sudo tee % > /dev/null
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -460,8 +463,8 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 "remapping emmet
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+"let g:user_emmet_install_global = 0
+"autocmd FileType html,css EmmetInstall
 
 au BufRead,BufNewFile *.scss set filetype=scss.css
 
@@ -489,9 +492,15 @@ nmap ga <Plug>(EasyAlign)
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'scss': ['stylelint']
+\   'scss': ['stylelint'],
+\   'css': ['stylelint']
 \}
 
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'scss': ['stylelint'],
+\   'css': ['stylelint']
+\}
 
 let g:taskrunner#split = "30vnew"
 let g:taskrunner#cmd = "gulp build:sass"
