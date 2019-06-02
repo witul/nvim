@@ -3,7 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'sickill/vim-monokai'
 "Plug 'tamelion/neovim-molokai'
 
-"Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 Plug 'jamessan/vim-gnupg'
 Plug 'shougo/denite.nvim'
